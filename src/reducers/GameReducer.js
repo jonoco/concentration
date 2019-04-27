@@ -2,7 +2,8 @@ import {
   REQUEST_DECK,
   RECEIVE_DECK,
   REQUEST_CARDS,
-  RECEIVE_CARDS
+  RECEIVE_CARDS,
+  MATCH_CARDS
 } from '../actions/actionTypes';
 
 const DefaultState = {
@@ -17,6 +18,13 @@ export default function GameReducter(state = DefaultState, action)
 
   switch(action.type)
   {
+    case MATCH_CARDS:
+      const matchedCards = state.cards.map(card => (payload.cards.includes(card) ? { ...card, matched: true } : card));
+
+      return {
+        ...state,
+        cards: matchedCards        
+      }
     case REQUEST_DECK:
       return { 
         ...state,
@@ -34,9 +42,14 @@ export default function GameReducter(state = DefaultState, action)
         isRequesting: true
       }
     case RECEIVE_CARDS:
+      const cards = payload.cards.map(card => ({
+        ...card,
+        matched: false
+      }));
+
       return {
         ...state,
-        cards: payload.cards,
+        cards,
         isRequesting: false
       }
     default:

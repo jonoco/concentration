@@ -3,8 +3,17 @@ import {
   REQUEST_DECK,
   RECEIVE_DECK,
   REQUEST_CARDS,
-  RECEIVE_CARDS
+  RECEIVE_CARDS,
+  MATCH_CARDS
 } from './actionTypes';
+
+
+export const matchCards = (cards) => {
+  return {
+    type: MATCH_CARDS,
+    payload: { cards }
+  }
+}
 
 
 const requestDeck = () => {
@@ -47,7 +56,7 @@ export const fetchDeck = (deck_id = 'new') => {
 
     return axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/shuffle/`)
       .then( res => {
-        console.log('Response:', res);
+        console.log('Deck response:', res);
 
         dispatch(receiveDeck(res.data.deck_id));
       });
@@ -65,7 +74,7 @@ export const fetchCards = (deck_id = 'new') => {
 
     return axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/draw/?count=52`)
       .then( res => {
-        console.log('Cards:', res);
+        console.log('Cards response:', res);
 
         dispatch(receiveCards(res.data.cards));
       });

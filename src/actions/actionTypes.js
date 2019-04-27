@@ -1,5 +1,5 @@
 export const REQUEST_DECK = 'REQUEST_DECK';
 export const RECEIVE_DECK = 'RECEIVE_DECK';
-
 export const REQUEST_CARDS = 'REQUEST_CARDS';
 export const RECEIVE_CARDS = 'RECEIVE_CARDS';
+export const MATCH_CARDS = 'MATCH_CARDS';

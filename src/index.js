@@ -13,9 +13,18 @@ import registerServiceWorker from './registerServiceWorker';
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 
-import {fetchDeck, fetchCards} from './actions/actions';
-store.dispatch(fetchDeck()).then(() => console.log(store.getState()));
-store.dispatch(fetchCards()).then(() => console.log(store.getState()));
+
+import {fetchDeck, fetchCards, matchCards} from './actions/actions';
+store.dispatch(fetchDeck())
+  .then(() => {
+    return store.dispatch(fetchCards());
+  })
+  .then(() => {
+    const cards = store.getState().cards;
+    store.dispatch(matchCards(cards.slice(0,2)));
+
+    console.log(store.getState());  
+  });
 
 
 ReactDOM.render(
