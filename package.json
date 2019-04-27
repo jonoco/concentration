@@ -9,8 +9,10 @@
     "deploy": "npm run build && surge dist baseball-roster.surge.sh"
   },
   "dependencies": {
+    "axios": "0.18.0",
     "react": "16.8.6",
-    "react-dom": "16.8.6"
+    "react-dom": "16.8.6",
+    "redux-thunk": "2.3.0"
   },
   "devDependencies": {
     "@babel/core": "7.4.4",

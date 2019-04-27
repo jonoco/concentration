@@ -1,2 +1,5 @@
-export const SHUFFLE_DECK = 'SHUFFLE_DECK';
-export const DRAW_CARDS = 'DRAW_CARDS';
+export const REQUEST_DECK = 'REQUEST_DECK';
+export const RECEIVE_DECK = 'RECEIVE_DECK';
+
+export const REQUEST_CARDS = 'REQUEST_CARDS';
+export const RECEIVE_CARDS = 'RECEIVE_CARDS';
