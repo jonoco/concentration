@@ -1,0 +1,12 @@
+.Card {
+  font-size: 9px;
+  flex-grow: 1;
+  
+  img {
+    width: 60px;
+  }
+}
+
+.Card:hover {
+  background-color: hsl(0,0, 90%);
+}
