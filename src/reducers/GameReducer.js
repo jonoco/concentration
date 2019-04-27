@@ -3,7 +3,9 @@ import {
   RECEIVE_DECK,
   REQUEST_CARDS,
   RECEIVE_CARDS,
-  MATCH_CARDS
+  MATCH_CARDS,
+  SELECT_CARD,
+  DESELECT_CARDS
 } from '../actions/actionTypes';
 
 const DefaultState = {
@@ -18,8 +20,22 @@ export default function GameReducter(state = DefaultState, action)
 
   switch(action.type)
   {
+    case SELECT_CARD:
+      const selectedCards = state.cards.map(card => (payload.card.code == card.code ? { ...card, selected: true } : card));
+      
+      return {
+        ...state,
+        cards: selectedCards
+      }
+    case DESELECT_CARDS:
+      const deselectedCards = state.cards.map(card => (payload.cards.includes(card) ? { ...card, selected: false } : card));
+      
+      return {
+        ...state,
+        cards: deselectedCards
+      }
     case MATCH_CARDS:
-      const matchedCards = state.cards.map(card => (payload.cards.includes(card) ? { ...card, matched: true } : card));
+      const matchedCards = state.cards.map(card => (payload.cards.includes(card) ? { ...card, matched: true, selected: false } : card));
 
       return {
         ...state,
@@ -44,7 +60,8 @@ export default function GameReducter(state = DefaultState, action)
     case RECEIVE_CARDS:
       const cards = payload.cards.map(card => ({
         ...card,
-        matched: false
+        matched: false,
+        selected: false
       }));
 
       return {

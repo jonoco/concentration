@@ -5,11 +5,28 @@ export default class Board extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      selectedCard: null
-    };
-
     this.handleCardSelect = this.handleCardSelect.bind(this);
+  }
+
+
+  componentDidUpdate(prevProps) {
+    const { selectedCards } = this.props;
+    if (selectedCards.length >= 2) {
+      
+      // check for matches to selected cards
+      console.log('selected cards: ', selectedCards);
+
+      
+      setTimeout(() => {
+        if (selectedCards[0].value == selectedCards[1].value) {
+          console.log('match found');
+          this.props.matchCards(selectedCards);
+        } else {
+          console.log('not a match');
+          this.props.deselectCards(selectedCards);
+        }
+      }, 1500);
+    }
   }
 
 
@@ -18,26 +35,23 @@ export default class Board extends Component {
    * @param  {Object} card Card being selected.
    */
   handleCardSelect(card) {
+    const { selectedCards } = this.props;
+
+    if (selectedCards.length >= 2) {
+      console.log('wait for match check');
+      return;
+    }
+  
+    // handle reselecting card
+    if (selectedCards.includes(card)) {
+      console.log('reselected ' + card.code);      
+      this.props.deselectCards([card]);
+      return;
+    }
+    
     console.log('selected ' + card.code);
 
-    if (this.state.selectedCard) {
-      // check for reselecting card
-      if (this.state.selectedCard.code == card.code) {
-        this.setState({ selectedCard: null });
-        return;
-      }
-
-      // check for a match with last selected card.
-      if (this.state.selectedCard.value == card.value) {
-        console.log('card matched');
-      } else {
-        console.log('not a match');
-      }
-
-      this.setState({ selectedCard: null });
-    } else {
-      this.setState({ selectedCard: card });
-    }
+    this.props.selectCard(card);
   }
   
 
@@ -52,11 +66,10 @@ export default class Board extends Component {
       return (
         <div className="row">
           {cards.map(card => {
-            const selected = this.state.selectedCard ? this.state.selectedCard.code == card.code : false;
             return (
               <Card 
                 card={card} 
-                selected={selected} 
+                selected={!!card.selected} 
                 handleClick={this.handleCardSelect} 
                 key={card.code} />
             )

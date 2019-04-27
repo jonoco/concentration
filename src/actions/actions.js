@@ -4,8 +4,26 @@ import {
   RECEIVE_DECK,
   REQUEST_CARDS,
   RECEIVE_CARDS,
-  MATCH_CARDS
+  MATCH_CARDS,
+  SELECT_CARD,
+  DESELECT_CARDS
 } from './actionTypes';
+
+
+export const selectCard = card => {
+  return {
+    type: SELECT_CARD,
+    payload: { card }
+  }
+}
+
+
+export const deselectCards = cards => {
+  return {
+    type: DESELECT_CARDS,
+    payload: { cards }
+  }
+}
 
 
 export const matchCards = (cards) => {
