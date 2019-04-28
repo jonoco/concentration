@@ -2,12 +2,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchDeck, fetchCards, matchCards, selectCard, deselectCards } from '../actions/actions';
 import Board from '../components/Board';
-import { selectedCardsSelector } from '../selectors';
+import { selectedCardsSelector, numMatchesSelector } from '../selectors';
 
 const mapStateToProps = state => ({
   cards: state.cards,
   selectedCards: selectedCardsSelector(state),
   deck: state.deck_id,
+  numMatches: numMatchesSelector(state),
+  showFaces: state.showFaces
 });
 
 

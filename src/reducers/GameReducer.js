@@ -5,13 +5,15 @@ import {
   RECEIVE_CARDS,
   MATCH_CARDS,
   SELECT_CARD,
-  DESELECT_CARDS
+  DESELECT_CARDS,
+  TOGGLE_FACES
 } from '../actions/actionTypes';
 
 const DefaultState = {
   cards: [],
   deck_id: '',
-  isRequesting: false
+  isRequesting: false,
+  showFaces: false
 };
 
 export default function GameReducter(state = DefaultState, action)
@@ -20,6 +22,11 @@ export default function GameReducter(state = DefaultState, action)
 
   switch(action.type)
   {
+    case TOGGLE_FACES:
+      return {
+        ...state,
+        showFaces: !state.showFaces
+      }
     case SELECT_CARD:
       const selectedCards = state.cards.map(card => (payload.card.code == card.code ? { ...card, selected: true } : card));
       

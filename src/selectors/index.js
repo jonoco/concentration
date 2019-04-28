@@ -6,3 +6,8 @@ export const selectedCardsSelector = createSelector(
   cardsSelector,
   cards => cards.filter(card => card.selected)
 )
+
+export const numMatchesSelector = createSelector(
+  cardsSelector,
+  cards => cards.filter(card => card.matched).length
+)

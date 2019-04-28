@@ -20,9 +20,6 @@ store.dispatch(fetchDeck())
     return store.dispatch(fetchCards());
   })
   .then(() => {
-    const cards = store.getState().cards;
-    store.dispatch(matchCards(cards.slice(0,2)));
-
     console.log(store.getState());  
   });
 

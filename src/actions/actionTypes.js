@@ -5,3 +5,4 @@ export const RECEIVE_CARDS = 'RECEIVE_CARDS';
 export const MATCH_CARDS = 'MATCH_CARDS';
 export const SELECT_CARD = 'SELECT_CARD';
 export const DESELECT_CARDS = 'DESELECT_CARDS';
+export const TOGGLE_FACES = 'TOGGLE_FACES';

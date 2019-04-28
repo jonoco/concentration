@@ -6,8 +6,16 @@ import {
   RECEIVE_CARDS,
   MATCH_CARDS,
   SELECT_CARD,
-  DESELECT_CARDS
+  DESELECT_CARDS,
+  TOGGLE_FACES
 } from './actionTypes';
+
+
+export const toggleFaces = () => {
+  return {
+    type: TOGGLE_FACES
+  }
+}
 
 
 export const selectCard = card => {

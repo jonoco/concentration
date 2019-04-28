@@ -6,10 +6,17 @@ export default class Board extends Component {
     super(props);
 
     this.handleCardSelect = this.handleCardSelect.bind(this);
+    this.handleGameOver = this.handleGameOver.bind(this);
   }
 
 
   componentDidUpdate(prevProps) {
+    // check for game over
+    if (this.props.numMatches == 52) {
+      this.handleGameOver();
+    }
+
+    // check matches
     const { selectedCards } = this.props;
     if (selectedCards.length >= 2) {
       
@@ -27,6 +34,11 @@ export default class Board extends Component {
         }
       }, 1500);
     }
+  }
+
+
+  handleGameOver() {
+    console.log('game over');
   }
 
 
@@ -69,7 +81,7 @@ export default class Board extends Component {
             return (
               <Card 
                 card={card} 
-                selected={!!card.selected} 
+                selected={!!card.selected || this.props.showFaces} 
                 handleClick={this.handleCardSelect} 
                 key={card.code} />
             )
