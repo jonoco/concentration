@@ -1,0 +1,16 @@
+.Controls {
+  button {
+    font-size: 14px;
+    color: #fff;
+    height: 30px;
+    width: 120px;
+    margin: 0 5px;
+    border: none;
+    background-color: #3699FF;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: #66A8FF;
+    }
+  }
+}
