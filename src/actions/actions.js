@@ -93,7 +93,7 @@ export const newGame = deck_id => {
   return (dispatch) => {
     dispatch(reset());
 
-    dispatch(fetchDeck())
+    dispatch(fetchDeck(deck_id))
       .then((res) => {
         return dispatch(fetchCards(res.deck_id));
       });
