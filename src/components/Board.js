@@ -5,6 +5,10 @@ export default class Board extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      matchWaitTime: 1000
+    };
+
     this.handleCardSelect = this.handleCardSelect.bind(this);
     this.handleGameOver = this.handleGameOver.bind(this);
   }
@@ -32,7 +36,7 @@ export default class Board extends Component {
           console.log('not a match');
           this.props.deselectCards(selectedCards);
         }
-      }, 1500);
+      }, this.state.matchWaitTime);
     }
   }
 
@@ -81,7 +85,8 @@ export default class Board extends Component {
             return (
               <Card 
                 card={card} 
-                selected={!!card.selected || this.props.showFaces} 
+                selected={!!card.selected} 
+                showFaces={this.props.showFaces}
                 handleClick={this.handleCardSelect} 
                 key={card.code} />
             )

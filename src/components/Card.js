@@ -2,24 +2,25 @@ import React from 'react';
 
 export const Card = props => {
   
-  const { card, selected, handleClick } = props;
+  const { card, selected, handleClick, showFaces } = props;
   const { code, matched, image } = card;
   
-  let className = 'Card';
-  if (props.selected) {
-    className += ' selected';
+  if (matched) {
+    return (
+      <div className='Card'>
+        <img className='animated flipOutY faster' src={image} alt={code}/>
+      </div>
+    );
   }
 
-  if (matched) {
-    return <div className={className}></div>
-  }
+  let cardClass = props.selected ? 'Card selected' : 'Card';
 
   return (
-    <div className={className} onClick={() => handleClick(card)}>
-      {selected ? 
-        <img src={image} alt={code}/>
+    <div className={cardClass} onClick={() => handleClick(card)}>
+      {selected || showFaces ? 
+        <img className='animated flipInY' src={image} alt={code}/>
         :
-        <div className="blank"></div>        
+        <div className='blank animated flipInY'></div>        
       }
     </div>
   )

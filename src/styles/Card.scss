@@ -1,29 +1,32 @@
 .Card {
-  font-size: 9px;
-  flex-grow: 1;
-  width: 60px;
-  height: 80px;
-  padding: 2px;
-  margin: 2px;
+  width: 70px;
+  height: 98px;
+  margin: 4px;
+  padding: 1px;
+  border-radius: 5px;
   
   img {
-    width: 100%;
-    height: 100%;
+    height: inherit;
+    width: inherit;
   }
 
   .blank {
-    width: 100%;
-    height: 100%;
-    background-color: hsl(0,0,15%);
+    width: inherit;
+    height: inherit;
+    background-color: hsl(0,0,90%);
+    border: 1px solid rgba(255,130,90,0.8);
+    border-radius: inherit;
   }
 
   &.selected {
-    // animate selection
+    margin: 3px;
+    border: 1px solid #63DFFF;  
   }
 
   &:hover {
-    border: 2px;
-    background-color: #63DFFF;
+    .blank {
+      border: 1px solid #63DFFF;  
+    }
   }
 }
 
