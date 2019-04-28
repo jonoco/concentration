@@ -72,6 +72,16 @@ const receiveCards = cards => {
 }
 
 
+export const newGame = deck_id => {
+  return (dispatch) => {
+    dispatch(fetchDeck())
+      .then((res) => {
+        return dispatch(fetchCards(res.deck_id));
+      });
+  }
+}
+
+
 /**  
  * Requests a shuffled deck.
  * @param  {String} deck_id Deck to request shuffled. If null, a new deck is created.
@@ -85,6 +95,8 @@ export const fetchDeck = (deck_id = 'new') => {
         console.log('Deck response:', res);
 
         dispatch(receiveDeck(res.data.deck_id));
+
+        return res.data;
       });
   }
 }
@@ -103,6 +115,8 @@ export const fetchCards = (deck_id = 'new') => {
         console.log('Cards response:', res);
 
         dispatch(receiveCards(res.data.cards));
+
+        return res.data;
       });
   }
 }
