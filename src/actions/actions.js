@@ -7,8 +7,25 @@ import {
   MATCH_CARDS,
   SELECT_CARD,
   DESELECT_CARDS,
-  TOGGLE_FACES
+  TOGGLE_FACES,
+  SAVE_TIME,
+  RESET
 } from './actionTypes';
+
+
+const reset = () => {
+  return {
+    type: RESET
+  }
+}
+
+
+export const saveTime = time => {
+  return {
+    type: SAVE_TIME,
+    payload: { time }
+  }
+}
 
 
 export const toggleFaces = () => {
@@ -74,6 +91,8 @@ const receiveCards = cards => {
 
 export const newGame = deck_id => {
   return (dispatch) => {
+    dispatch(reset());
+
     dispatch(fetchDeck())
       .then((res) => {
         return dispatch(fetchCards(res.deck_id));

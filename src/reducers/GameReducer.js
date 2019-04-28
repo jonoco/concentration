@@ -6,14 +6,18 @@ import {
   MATCH_CARDS,
   SELECT_CARD,
   DESELECT_CARDS,
-  TOGGLE_FACES
+  TOGGLE_FACES,
+  SAVE_TIME,
+  RESET
 } from '../actions/actionTypes';
 
 const DefaultState = {
   cards: [],
   deck_id: '',
   isRequesting: false,
-  showFaces: false
+  showFaces: false,
+  bestTime: null,
+  startTime: Date.now()
 };
 
 export default function GameReducter(state = DefaultState, action)
@@ -22,6 +26,16 @@ export default function GameReducter(state = DefaultState, action)
 
   switch(action.type)
   {
+    case RESET:
+      return {
+        ...state,
+        startTime: Date.now()
+      }
+    case SAVE_TIME:
+      return {
+        ...state,
+        bestTime: payload.time
+      }
     case TOGGLE_FACES:
       return {
         ...state,

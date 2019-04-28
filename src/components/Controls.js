@@ -6,26 +6,40 @@ export default class Controls extends Component {
     super(props);
 
     this.state = {
-      startTime: Date.now(),
       elapsedTime: 0
     }
   }
 
+
   componentDidMount() {
     this.timerHandle = setInterval(() => {
-      this.setState({ elapsedTime: Date.now() - this.state.startTime })
+      this.setState({ elapsedTime: Date.now() - this.props.startTime })
     }, 1000);
   }
+
 
   componentWillUnmount() {
     clearInterval(this.timerHandle);
   }
 
+
+  componentDidUpdate() {
+    const { numMatches, bestTime, saveTime } = this.props;
+
+    if (numMatches == 52) {
+      // save the best time
+      if (!bestTime || this.state.elapsedTime < bestTime) {
+        saveTime(this.state.elapsedTime);  
+      }
+    }
+  }
+
+
   render() {
-    const { numMatches, deck, newGame, toggleFaces } = this.props;
+    const { numMatches, deck, newGame, toggleFaces, bestTime } = this.props;
     return (
       <div className="Controls">
-        <Info numMatches={numMatches} time={this.state.elapsedTime} />
+        <Info numMatches={numMatches} time={this.state.elapsedTime} bestTime={bestTime} />
         <button onClick={() => newGame(deck)}>New game</button>
         <button onClick={() => toggleFaces()}>Toggle faces</button>
       </div>

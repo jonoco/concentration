@@ -6,3 +6,5 @@ export const MATCH_CARDS = 'MATCH_CARDS';
 export const SELECT_CARD = 'SELECT_CARD';
 export const DESELECT_CARDS = 'DESELECT_CARDS';
 export const TOGGLE_FACES = 'TOGGLE_FACES';
+export const SAVE_TIME = 'SAVE_TIME';
+export const RESET = 'RESET';
