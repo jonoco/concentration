@@ -26,6 +26,7 @@ export default class Controls extends Component {
   componentDidUpdate() {
     const { numMatches, bestTime, saveTime } = this.props;
 
+    // check for game over
     if (numMatches == 52) {
       // save the best time
       if (!bestTime || this.state.elapsedTime < bestTime) {

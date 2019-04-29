@@ -111,7 +111,7 @@ export const fetchDeck = (deck_id = 'new') => {
 
     return axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/shuffle/`)
       .then( res => {
-        console.log('Deck response:', res);
+        console.log('Deck request response:', res);
 
         dispatch(receiveDeck(res.data.deck_id));
 
@@ -131,7 +131,7 @@ export const fetchCards = (deck_id = 'new') => {
 
     return axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/draw/?count=52`)
       .then( res => {
-        console.log('Cards response:', res);
+        console.log('Cards request response:', res);
 
         dispatch(receiveCards(res.data.cards));
 

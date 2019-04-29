@@ -9,9 +9,6 @@ export const Info = props => {
       {props.bestTime &&
         <p>Best time: {Math.floor(props.bestTime / 1000)}</p>
       }
-      {props.numMatches == 52 &&
-        <h1>Game over!</h1>
-      }
     </div>
   )
 }

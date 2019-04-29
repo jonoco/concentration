@@ -17,11 +17,7 @@ const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 import {fetchDeck, fetchCards, matchCards} from './actions/actions';
 store.dispatch(fetchDeck())
   .then((res) => {
-    console.log(res);
     return store.dispatch(fetchCards(res.deck_id));
-  })
-  .then((res) => {
-    console.log(store.getState());  
   });
 
 

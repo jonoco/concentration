@@ -10,39 +10,23 @@ export default class Board extends Component {
     };
 
     this.handleCardSelect = this.handleCardSelect.bind(this);
-    this.handleGameOver = this.handleGameOver.bind(this);
   }
 
 
   componentDidUpdate(prevProps) {
-    // check for game over
-    if (this.props.numMatches == 52) {
-      this.handleGameOver();
-    }
-
     // check matches
     const { selectedCards } = this.props;
     if (selectedCards.length >= 2) {
       
-      // check for matches to selected cards
-      console.log('selected cards: ', selectedCards);
-
-      
+      // pause to check for matches to selected cards
       setTimeout(() => {
         if (selectedCards[0].value == selectedCards[1].value) {
-          console.log('match found');
           this.props.matchCards(selectedCards);
         } else {
-          console.log('not a match');
           this.props.deselectCards(selectedCards);
         }
       }, this.state.matchWaitTime);
     }
-  }
-
-
-  handleGameOver() {
-    console.log('game over');
   }
 
 
@@ -53,26 +37,23 @@ export default class Board extends Component {
   handleCardSelect(card) {
     const { selectedCards } = this.props;
 
+    // ignore select if a match check is occuring
     if (selectedCards.length >= 2) {
-      console.log('wait for match check');
       return;
     }
   
     // handle reselecting card
     if (selectedCards.includes(card)) {
-      console.log('reselected ' + card.code);      
       this.props.deselectCards([card]);
       return;
     }
-    
-    console.log('selected ' + card.code);
 
     this.props.selectCard(card);
   }
   
 
   render() {
-    const { cards } = this.props;
+    const { cards, numMatches } = this.props;
     
     if (cards.length == 0) {
       return <p>loading...</p>
@@ -97,6 +78,10 @@ export default class Board extends Component {
 
     return (
       <div className="Board">
+        {numMatches == 52 && 
+          <h1 className='animated fadeIn'>Game over!</h1>
+        }
+
         {renderRow(cards.slice(0,13))}
         {renderRow(cards.slice(13,26))}
         {renderRow(cards.slice(26,39))}
